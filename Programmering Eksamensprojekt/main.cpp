@@ -38,6 +38,8 @@ cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
 int main()
 {
     drawboard();
+    
+    cout << "haha" << endl;
     return 0;
 }
 
