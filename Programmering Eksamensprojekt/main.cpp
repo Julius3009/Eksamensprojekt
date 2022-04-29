@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 
 using namespace std;
 
@@ -41,7 +42,63 @@ int main()
 
     cout << "hayhhhgfba" << endl;
         cout << "hayhhhgfba" << endl;
-
+    
+        string answer;
+        int KbdAscii;
+    
+    //        string answer;
+    
+        cout << "Press keys" << endl;
+        do
+        {
+            while (kbhit()==0); // waite for keypress
+            KbdAscii =getch();
+    //        cout << KbdAscii << endl; // Debug information
+    
+            switch (KbdAscii)
+            {
+                case 224:
+                    KbdAscii =getch();
+                    cout << "Special Key - reading one more key:  ";
+                    switch  (KbdAscii)
+                    {
+                        case 72:
+                            cout << "UpKey" << endl;
+                            break;
+                        case 75:
+                            cout << "LeftKey" << endl;
+                            break;
+                        case 77:
+                            cout << "RightKey" << endl;
+                            break;
+                        case 80:
+                            cout << "DownKey" << endl;
+                            break;
+                        default:
+                            cout << "Key with ASCII= " << KbdAscii << endl;
+                            break;
+                    }
+                break;
+                case 13:
+                    cout << "Key with ASCII= " << KbdAscii << endl;
+                break;
+                case 27:    // esc - end game?
+                    cout << "EscKey" << endl;
+                break;
+                case 'a':
+                    cout << "a Key" << endl;
+                    break;
+                case 'f':
+                    cout << "f Key" << endl;
+                    break;
+    
+                default:
+                    cout << "Key with ASCII= " << KbdAscii << endl;
+            }
+    
+        } while (true);
+    
+    
     return 0;
 }
 
