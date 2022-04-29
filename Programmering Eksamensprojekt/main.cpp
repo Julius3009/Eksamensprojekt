@@ -38,8 +38,10 @@ cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
 int main()
 {
     drawboard();
-    
-    cout << "haha" << endl;
+
+    cout << "hayhhhgfba" << endl;
+        cout << "hayhhhgfba" << endl;
+
     return 0;
 }
 
