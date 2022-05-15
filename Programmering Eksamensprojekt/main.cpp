@@ -28,7 +28,6 @@ char boardSolved [9][9] = {{'8','4','6','1','7','2','5','9','3'},
 void placerTal(char tal, int y, int x);
 bool slutSpil = false;
 bool validerInput (char tal, int y, int x);
-void check_filled();
 void drawboard (){
 
     cout << "-------------------------------------" << endl;
@@ -54,16 +53,21 @@ int main()
     char tal;
     int x, y;
     
-    cout << "Velkommen til Sudoku" << endl;
+    cout << "Velkommen til Sudoku\n" << endl;
     
-    cout << "Tast 1 for at se reglernerne" << endl;
+    cout << "Tast 1 for at se spillereglernerne" << endl;
     cout << "Tast 2 for at spille spillet" << endl;
 
     cin >> svar;
     
     if ((svar = 1)){
-        cout << "Soduko pladen " << endl;
+        cout << "Sudoku spilles på en plade med 9x9 felter, der er delt ind i mindre regioner som hver er 3x3 felter." << endl;
         
+        cout << "Når spillet starter er nogle af felterne allerede fyldte med tal, \nmålet med Sudoku er at udfylde de resterende felter med tal fra 1-9.\n" << endl;
+        
+        cout << "Et tal må kun optræde en gang i hver række, kolonne og region.\n \n" << endl;
+        
+
         cout << "For at starte spillet, indtast et tilfældigt bogstav eller tegn" << endl;
         
         cin >> svar2;
@@ -82,14 +86,11 @@ int main()
             y--;
             x--;
                        placerTal(tal, y, x);
-            
 
         }
         
     } else {
         
-    
-    
     
     while (slutSpil == false) {
       
@@ -105,18 +106,12 @@ int main()
         y--;
         x--;
                    placerTal(tal, y, x);
-        
-
+    
     }
     
     }
      
-    
-    
-
 }
-
-
 
 void placerTal(char tal , int y, int x){
 
@@ -129,9 +124,3 @@ void placerTal(char tal , int y, int x){
       cout << endl << endl;
 
     }
-
-
-
-
-
-
