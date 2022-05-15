@@ -1,104 +1,163 @@
 #include <iostream>
-#include <conio.h>
 
 using namespace std;
 
-char board [9][9] = {' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' ',
-                     ' ',' ',' ', ' ',' ',' ', ' ',' ',' '};
+
+char board [9][9] = {{' ',' ','6','1',' ','2','5',' ',' '},
+                    {' ','3','9',' ',' ',' ','1','4',' '},
+                    {' ',' ',' ',' ','4',' ',' ',' ',' '},
+                    {'9',' ','2',' ','3',' ','4',' ','1'},
+                    {' ','8',' ',' ',' ',' ',' ','7',' '},
+                    {'1',' ','3',' ','6',' ','8',' ','9'},
+                    {' ',' ',' ',' ','1',' ',' ',' ',' '},
+                    {' ','5','4',' ',' ',' ','9','1',' '},
+                    {' ',' ','7','5',' ','3','2',' ',' '}};
+
+char boardSolved [9][9] = {{'8','4','6','1','7','2','5','9','3'},
+                           {'7','3','9','6','5','8','1','4','2'},
+                           {'5','2','1','3','4','9','7','6','8'},
+                           {'9','6','2','8','3','7','4','5','1'},
+                           {'4','8','5','9','2','1','3','7','6'},
+                           {'1','7','3','4','6','5','8','2','9'},
+                           {'2','9','8','7','1','4','6','3','5'},
+                           {'3','5','4','2','8','6','9','1','7'},
+                           {'6','1','7','5','9','3','2','8','4'}};
+
+void placerTal(char tal, int y, int x);
+bool slutSpil = false;
+bool validerInput (char tal, int y, int x);
+void check_filled();
 
 void drawboard (){
 
-cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
-cout << "* " << board [0][0] << " | " << board [0][1] << " |   *" << board [0][2] << " " << board [0][3] << " | " << board [0][4] << " | " << board [0][5] << " * " << board [0][6] << " | " << board [0][7] << " |   *" << board [0][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [1][0] << " | " << board [1][1] << " |   *" << board [1][2] << " " << board [1][3] << " | " << board [1][4] << " | " << board [1][5] << " * " << board [1][6] << " | " << board [1][7] << " |   *" << board [1][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [2][0] << " | " << board [2][1] << " |   *" << board [2][2] << " " << board [2][3] << " | " << board [2][4] << " | " << board [2][5] << " * " << board [2][6] << " | " << board [2][7] << " |   *" << board [2][8] << endl;
-cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
-cout << "* " << board [3][0] << " | " << board [3][1] << " |   *" << board [3][2] << " " << board [3][3] << " | " << board [3][4] << " | " << board [3][5] << " * " << board [3][6] << " | " << board [3][7] << " |   *" << board [3][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [4][0] << " | " << board [4][1] << " |   *" << board [4][2] << " " << board [4][3] << " | " << board [4][4] << " | " << board [4][5] << " * " << board [4][6] << " | " << board [4][7] << " |   *" << board [4][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [5][0] << " | " << board [5][1] << " |   *" << board [5][2] << " " << board [5][3] << " | " << board [5][4] << " | " << board [5][5] << " * " << board [5][6] << " | " << board [5][7] << " |   *" << board [5][8] << endl;
-cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
-cout << "* " << board [6][0] << " | " << board [6][1] << " |   *" << board [6][2] << " " << board [6][3] << " | " << board [6][4] << " | " << board [6][5] << " * " << board [6][6] << " | " << board [6][7] << " |   *" << board [6][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [7][0] << " | " << board [7][1] << " |   *" << board [7][2] << " " << board [7][3] << " | " << board [7][4] << " | " << board [7][5] << " * " << board [7][6] << " | " << board [7][7] << " |   *" << board [7][8] << endl;
-cout << "*-----------*" << "------------*" << "-----------*" << endl;
-cout << "* " << board [8][0] << " | " << board [8][1] << " |   *" << board [8][2] << " " << board [8][3] << " | " << board [8][4] << " | " << board [8][5] << " * " << board [8][6] << " | " << board [8][7] << " |   *" << board [8][8] << endl;
-cout << "* * * * * * *" << " * * * * * * *" << " * * * * * *" << endl;
-}
+    cout << "-------------------------------------" << endl;
+      for(int i = 0; i < 9; i++) {
+        cout << "| ";
+        for(int j = 0; j < 9; j++) {
+            cout << board[i][j] << " | ";
+            
+        
+        }
+         
+        cout << endl;
+        cout << "-------------------------------------" << endl;
+      }
+    }
+
+
 
 int main()
 {
-    drawboard();
+    while (slutSpil == false) {
+        char tal;
+        int x, y;
+        
+        drawboard();
+        
+        cout << "Indtast det tal du vil placere" << endl;
+        cin >> tal;
+        
+        cout << "Indtast koordinaterne til det felt du vil placere dit tal i";
+        cin >> y; cin >> x;
 
-    cout << "hayhhhgfba" << endl;
-        cout << "hayhhhgfba" << endl;
+        
+        if(validerInput(tal, y, x)){
+                   placerTal(tal, y-1, x-1);
+
+               } else {
+                   cout << "NEJ, kan ikke placeres her!" << endl;
+               }
+               cout << endl << endl;
+        
+        
+
+    }
     
-        string answer;
-        int KbdAscii;
-    
-    //        string answer;
-    
-        cout << "Press keys" << endl;
-        do
-        {
-            while (kbhit()==0); // waite for keypress
-            KbdAscii =getch();
-    //        cout << KbdAscii << endl; // Debug information
-    
-            switch (KbdAscii)
-            {
-                case 224:
-                    KbdAscii =getch();
-                    cout << "Special Key - reading one more key:  ";
-                    switch  (KbdAscii)
-                    {
-                        case 72:
-                            cout << "UpKey" << endl;
-                            break;
-                        case 75:
-                            cout << "LeftKey" << endl;
-                            break;
-                        case 77:
-                            cout << "RightKey" << endl;
-                            break;
-                        case 80:
-                            cout << "DownKey" << endl;
-                            break;
-                        default:
-                            cout << "Key with ASCII= " << KbdAscii << endl;
-                            break;
-                    }
-                break;
-                case 13:
-                    cout << "Key with ASCII= " << KbdAscii << endl;
-                break;
-                case 27:    // esc - end game?
-                    cout << "EscKey" << endl;
-                break;
-                case 'a':
-                    cout << "a Key" << endl;
-                    break;
-                case 'f':
-                    cout << "f Key" << endl;
-                    break;
-    
-                default:
-                    cout << "Key with ASCII= " << KbdAscii << endl;
-            }
-    
-        } while (true);
+  
+     
     
     
-    return 0;
+
 }
+
+void check_filled() {
+    int spots_not_filled = 0;
+    for(int i = 0; i<9; i++){
+        for(int j = 0; j<9; j++){
+            if (board[i][j] == ' ') {
+                spots_not_filled++;
+            }
+        }
+    }
+    if (spots_not_filled == 0) {
+        slutSpil = true;
+    }
+    
+}
+
+
+void placerTal(char tal , int y, int x){
+//board[y][x]=tal;
+
+   if (board[x][y] == ' '){
+    board[x][y] = tal;
+   }
+
+    }
+
+
+
+//     Tjek vandret for samme tal
+bool validerInput (char tal, int y, int x){
+    for(int valider = 0; valider < 9; valider++){
+        if(valider != x){
+            if(board[valider][y] == tal){
+                return false;
+            }
+        }
+    }
+// Tjek lodret for samme tal
+    for(int valider = 0; valider < 9; valider++){
+        if(valider != y){
+            if(board[x][valider] == tal){
+            }
+        }
+    }
+    int board_tjek_x, board_tjek_y;
+        if(x < 3){
+            board_tjek_x = 0;
+        }
+        else if(x < 6){
+            board_tjek_x = 3;
+        }
+        else {
+            board_tjek_x = 6;
+        }
+        if(y < 3){
+            board_tjek_y = 0;
+        }
+        else if(y < 6){
+            board_tjek_y = 3;
+        }
+        else {
+            board_tjek_y = 6;
+        }
+
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                int x = board_tjek_x + i;
+                int y = board_tjek_y + j;
+                if(x != x && y != y){
+                    if(board [x][y] == tal)
+                    return false;
+                }
+            }
+        }
+        return true;
+    
+    }
+
+
+
+
 
