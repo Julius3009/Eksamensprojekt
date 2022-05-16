@@ -29,6 +29,22 @@ void placerTal(char tal, int y, int x);
 bool slutSpil = false;
 bool validerInput (char tal, int y, int x);
 
+void drawboard (){
+    cout << "-------------------------------------" << endl;
+      for(int i = 0; i < 9; i++) {
+        cout << "| ";
+        for(int j = 0; j < 9; j++) {
+            cout << board[i][j] << " | ";
+            
+        
+        }
+         
+        cout << endl;
+        cout << "-------------------------------------" << endl;
+      }
+    }
+
+
 
 int main()
 {
@@ -96,23 +112,6 @@ int main()
     }
      
 }
-
-void drawboard (){
-cout << "-------------------------------------" << endl;
-  for(int i = 0; i < 9; i++) {
-    cout << "| ";
-    for(int j = 0; j < 9; j++) {
-        cout << board[i][j] << " | ";
-        
-    
-    }
-     
-    cout << endl;
-    cout << "-------------------------------------" << endl;
-  }
-}
-
-
 
 void placerTal(char tal , int y, int x){
 
