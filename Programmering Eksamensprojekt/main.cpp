@@ -29,6 +29,8 @@ void placerTal(char tal, int y, int x);
 bool slutSpil = false;
 bool validerInput (char tal, int y, int x);
 void drawboard (){
+int svar;
+
 
     cout << "-------------------------------------" << endl;
       for(int i = 0; i < 9; i++) {
@@ -60,7 +62,7 @@ int main()
 
     cin >> svar;
     
-    if ((svar = 1)){
+    if (svar == 1){
         cout << "Sudoku spilles på en plade med 9x9 felter, der er delt ind i mindre regioner som hver er 3x3 felter." << endl;
         
         cout << "Når spillet starter er nogle af felterne allerede fyldte med tal, \nmålet med Sudoku er at udfylde de resterende felter med tal fra 1-9.\n" << endl;
